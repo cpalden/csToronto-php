@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Report</title>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script> 
+	$(function(){
+	  $("#header").load("header.php"); 
+	  $("#footer").load("footer.html");
+	  $("#mymap").load("map.js");	
+	});
+	</script> 
+</head>
+<body>
+	<div id="header"></div>
+	<!--Remaining section-->
+	<div class="container" style="padding-top:60px">
+	<form action="report.inc.php" method="post">
+		<div class="col-sm-8">
+			<fieldset id="mymap"></fieldset>
+		</div>
+		<div class="col-sm-4" style="padding-bottom:20px">	
+		<fieldset id="problemList">
+			<legend>Mark the problems on the site</legend>
+				<label><input type="checkbox" />Utility Failures</label><br>
+				<label><input type="checkbox" />Tree Collapse</label><br>
+				<label><input type="checkbox" />Potholes</label><br>
+				<label><input type="checkbox" />Flooded Streets</label><br>
+				<label><input type="checkbox" />Eroded Streets</label><br>
+				<label><input type="checkbox" />Garbage or Road blocking Objects</label><br>
+				<label><input type="checkbox" />City Property Vandalism</label><br>
+				<label><input type="checkbox" />Mould and Spore Growth</label><br>
+		</fieldset>
+		<fieldset id="location">
+			<legend>Click on the map to locate or enter</legend>
+			<input type="text" placeholder="Address/intersection" required /><br>
+		</fieldset>
+		</div>
+		<button id="report" class="btn btn-primary" type="submit">Report</button>
+	</form>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>
+			  	
+	

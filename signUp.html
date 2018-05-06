@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign Up</title>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script> 
+	$(function(){
+	  $("#header").load("header.php"); 
+	  $("#footer").load("footer.html"); 
+	});
+	</script> 
+</head>
+<body>
+	<div id="header"></div>
+	<!--Remaining section-->
+	<div class="container" style="padding-top:60px">
+		<form action="includes/signUp.inc.php" method="post">
+			<legend>Registration</legend>
+			<input type="text" name="firstName" placeholder="First Name" required><br>
+			<input type="text" name="lastName" placeholder="Last Name" required><br>
+			<input type="text" name="email" placeholder="E-mail" required><br>
+			<input type="password" name="password" placeholder="Password" required><br>
+			<button class="btn btn-primary" type="submit" value="submit">SignUp</button>
+		</form>
+	</div>	
+	<div id="footer"></div>
+</body>
+</html>
+	
+	
+
+		
+	
