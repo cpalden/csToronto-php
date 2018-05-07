@@ -71,7 +71,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				<fieldset id="myMap" style="height:450px; width:750px;"></fieldset>
 			</div>	
 			<div class="col-sm-4">	
-				<fieldset id="problemList" style="padding-bottom:10px">
+				<fieldset id="problemList" style="padding-bottom:5px">
 				<legend>Mark the problems on the site</legend>
 					<input type="checkbox" name='problem[]' value='Utility Failures'/>Utility Failures<br>
 					<input type="checkbox" name='problem[]' value='Tree Collapse'/>Tree Collapse<br>
@@ -83,12 +83,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					<input type="checkbox" name='problem[]' value='Mould and Spore Growth'/>Mould and Spore Growth<br>
 					<input type="text" name='problem[]' placeholder='other' size='25'/><br>
 				</fieldset>
-				<fieldset id="location" style="padding-bottom:10px">
+				<fieldset id="location" style="padding-bottom:20px">
 				<legend>Drag the marker on the map to locate</legend>	
 					<input type="text" id="address" name="loc"size="50"/>
 				</fieldset>
-			</div>
-			<button id="report" class="btn btn-primary" type="submit">Report</button>	
+				<fieldset id="" style="padding-bottom:5px">	
+					<input type="text"><button onclick="uploadImage.php" >Upload Image</button></input>
+				</fieldset>
+				<button id="report" class="btn btn-primary" type="submit">Report</button>
+			</div>	
 		</form>
 	</div>	
 	<div id="footer">
