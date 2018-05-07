@@ -6,10 +6,10 @@
   margin-top: 0;
   float: left;
 }
-#mymap{
-	height: 400px;
-	width: 700px;
-}
+#myMap{	
+	height: 450px;
+	width: 750px;
+   }
 .container-fluid{
 	background-color:rgba(0,0,220,.4);
 }

@@ -1,46 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Report</title>
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script> 
-	$(function(){
+<title>Report</title>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuNre_l4nGqY4gP9SeQD-PyGbfuBzB168&sensor=false"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+$(function(){
 	  $("#header").load("header.php"); 
 	  $("#footer").load("footer.html");
-	  $("#mymap").load("map.js");	
+	  });
+</script>	  
+<script type="text/javascript"> 
+var map;
+var marker;
+var myLatlng = new google.maps.LatLng(43.65,-79.38);
+var geocoder = new google.maps.Geocoder();
+var infowindow = new google.maps.InfoWindow();
+function initialize(){
+	var mapOptions = {
+	zoom: 13,
+	center: myLatlng,
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+
+map = new google.maps.Map(document.getElementById("myMap"), mapOptions);
+
+marker = new google.maps.Marker({
+map: map,
+position: myLatlng,
+draggable: true 
+}); 
+
+geocoder.geocode({'latLng': myLatlng }, function(results, status) {
+	if (status == google.maps.GeocoderStatus.OK) {
+		if (results[0]) {
+			$('#latitude,#longitude').show();
+			$('#address').val(results[0].formatted_address);
+			$('#latitude').val(marker.getPosition().lat());
+			$('#longitude').val(marker.getPosition().lng());
+			infowindow.setContent(results[0].formatted_address);
+			infowindow.open(map, marker);
+		}
+	}
+});
+
+google.maps.event.addListener(marker, 'dragend', function() {
+
+	geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			if (results[0]) {
+				$('#address').val(results[0].formatted_address);
+				$('#latitude').val(marker.getPosition().lat());
+				$('#longitude').val(marker.getPosition().lng());
+				infowindow.setContent(results[0].formatted_address);
+				infowindow.open(map, marker);
+			}
+		}
 	});
-	</script> 
+});
+
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 </head>
 <body>
 	<div id="header"></div>
-	<!--Remaining section-->
 	<div class="container" style="padding-top:60px">
-	<form action="report.inc.php" method="post">
-		<div class="col-sm-8">
-			<fieldset id="mymap"></fieldset>
-		</div>
-		<div class="col-sm-4" style="padding-bottom:20px">	
-		<fieldset id="problemList">
-			<legend>Mark the problems on the site</legend>
-				<label><input type="checkbox" />Utility Failures</label><br>
-				<label><input type="checkbox" />Tree Collapse</label><br>
-				<label><input type="checkbox" />Potholes</label><br>
-				<label><input type="checkbox" />Flooded Streets</label><br>
-				<label><input type="checkbox" />Eroded Streets</label><br>
-				<label><input type="checkbox" />Garbage or Road blocking Objects</label><br>
-				<label><input type="checkbox" />City Property Vandalism</label><br>
-				<label><input type="checkbox" />Mould and Spore Growth</label><br>
-		</fieldset>
-		<fieldset id="location">
-			<legend>Click on the map to locate or enter</legend>
-			<input type="text" placeholder="Address/intersection" required /><br>
-		</fieldset>
-		</div>
-		<button id="report" class="btn btn-primary" type="submit">Report</button>
-	</form>
+		<form action="report.php" method="post">
+			<div class="col-sm-8">
+				<fieldset id="myMap" style="height:450px; width:750px;"></fieldset>
+			</div>	
+			<div class="col-sm-4">	
+				<fieldset id="problemList" style="padding-bottom:10px">
+				<legend>Mark the problems on the site</legend>
+					<input type="checkbox" name='problem[]' value='Utility Failures'/>Utility Failures<br>
+					<input type="checkbox" name='problem[]' value='Tree Collapse'/>Tree Collapse<br>
+					<input type="checkbox" name='problem[]' value='Potholes'/>Potholes<br>
+					<input type="checkbox" name='problem[]' value='Flooded Streets'/>Flooded Streets<br>
+					<input type="checkbox" name='problem[]' value='Eroded Streets'/>Eroded Streets<br>
+					<input type="checkbox" name='problem[]' value='Garbage/Road blocking Objects'/>Garbage/Road blocking Objects<br>
+					<input type="checkbox" name='problem[]' value='City Property Vandalism'/>City Property Vandalism<br>
+					<input type="checkbox" name='problem[]' value='Mould and Spore Growth'/>Mould and Spore Growth<br>
+					<input type="text" name='problem[]' placeholder='other' size='25'/><br>
+				</fieldset>
+				<fieldset id="location" style="padding-bottom:10px">
+				<legend>Drag the marker on the map to locate</legend>	
+					<input type="text" id="address" name="loc"size="50"/>
+				</fieldset>
+			</div>
+			<button id="report" class="btn btn-primary" type="submit">Report</button>	
+		</form>
+	</div>	
+	<div id="footer">
 	</div>
-	<div id="footer"></div>
 </body>
-</html>
-			  	
-	
+<html>
